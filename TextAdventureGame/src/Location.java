@@ -21,6 +21,14 @@ public class Location {
       directions = new HashMap<>();
    }
 
+   public Location() {
+      this("", "");
+   }
+
+   public Location(AdventureGame game, String shortDesc) {
+      this(game.getLocation(shortDesc).getShortDesc(), game.getLocation(shortDesc).getLongDesc(), game.getLocation(shortDesc).getDirections());
+   }
+
    public HashMap<String, String> getDirections() {
       return directions;
    }
@@ -43,7 +51,7 @@ public class Location {
 
    public void addDirection(String direction, String location) {
       //function in the AdventureGame class that checks if the location exists and if the direction
-      //length is equal to 1 so it can be added.
+      //length is equal to 1, so it can be added.
       directions.put(direction, location);
 
 
@@ -51,6 +59,11 @@ public class Location {
 
    public void printDirections() {
       getDirections().forEach((k, v) -> System.out.println(k + " - " + v));
+   }
+
+   @Override
+   public String toString() {
+      return "ShortDesc: " + shortDesc + "\nLongDesc: " + longDesc + "\nDirections: \n" + directions.toString();
    }
 }
 
