@@ -66,4 +66,3 @@ public class Location {
       return "ShortDesc: " + shortDesc + "\nLongDesc: " + longDesc + "\nDirections: \n" + directions.toString();
    }
 }
-

@@ -6,27 +6,35 @@ public class Main {
 
    public static void main(String[] args) {
 
-      // got the main map print working
-      // function to print the places description and the options to move, if Q then quit
-      // move player function works by returning the next location player is going into or
-      //						  null if the compassSign does not correlate to a nextLocation
+      /* chooseNextLocation function return the nextLcoation player is going to,
+       null if the compassSign is wrong, if he puts Q it will also print Exiting application..... and return null
+       */
+      //NS: Make a while loop for movement, there is a while loop  in chooseNextLocation for inputting a compassSign
 
-      //NS: basic move while loop for playing the game
-
-     /*
-     for testing purposes
-     player = adventureMap.getLocation("hill");
-     adventureMap.printGame(player.getShortDesc());
-     player = adventureMap.movePlayer(player.getShortDesc(), "S");
-     System.out.println("\n" + player);
-     */
-
+      boolean playing = true;
       AdventureGame adventureMap = new AdventureGame();
       Location player = new Location(adventureMap, "road");
-      System.out.println(player);
-      adventureMap.chooseNextLocation(player);
-      System.out.println(player);
-      // ChooseNext Location returns null always, even after choosing right compass sign
 
+      while(playing) {
+         // while loop for moving
+         player = adventureMap.chooseNextLocation(player);
+         if(player == null) {
+            playing = false;
+         }
+
+      }
+   }
+
+   public void testFunction() {
+      // test function just to have it at hand if something doesn't work unexpectedly
+      System.out.println("-------------------------------");
+      System.out.println("TESTING:\n---------------------------\n");
+      AdventureGame adventureMap = new AdventureGame();
+      Location player = new Location(adventureMap, "road");
+      System.out.println("Before chooseNextLocation \n" + player);
+      System.out.println("---------------------------");
+      player = adventureMap.chooseNextLocation(player);
+      System.out.println("After choosing nextLocation: " + player);
+      System.out.println("---------------------------");
    }
 }

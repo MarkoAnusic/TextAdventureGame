@@ -81,10 +81,10 @@ public class AdventureGame {
       //returns null if the compassSign
       //does not exist in the currentLocation player is in
       Location nextLocation = new Location();
+      String nextShortDesc = currentLocation.getDirections().get(compassSign); // returns shortDesc of the nextLocation
       if(currentLocation != null) {
-         if(currentLocation.getDirections().get(compassSign) != null) {
-            // returns null?
-            nextLocation = gameMap.get(currentLocation.getDirections().get(compassSign));
+         if(nextShortDesc != null) {
+            nextLocation = gameMap.get(nextShortDesc);
             return nextLocation;
          }
       }
@@ -103,13 +103,21 @@ public class AdventureGame {
          System.out.println("What location do you choose to go to? -->");
          chosenCompassSign = String.valueOf(scanner.next().charAt(0));
          if("NWSEnwse".contains(chosenCompassSign)) {
-            // if the given compass Sign is NWSE it returns true, false if it is not
-            player = movePlayer(player.getShortDesc(), chosenCompassSign);
-            //returns null
-            System.out.println(player);
+            // if the given compass Sign is NWSE or nwse it returns true, false if it is not
+//            System.out.println("Current player in the chooseNextLocation: \n" + player);
+//            System.out.println("-------------------------");
+            player = movePlayer(player.getShortDesc(), chosenCompassSign.toUpperCase());
+//            System.out.println("After movePlayer function\n" + player);
+//            System.out.println("-------------------------");
             quit = true;
          }
          else if(chosenCompassSign.equalsIgnoreCase("Q")) {
+            System.out.println("Exiting application...");
+            try {
+               TimeUnit.SECONDS.sleep(2);
+            } catch(InterruptedException e) {
+               throw new RuntimeException(e);
+            }
             return null;
          }
          else {
