@@ -1,14 +1,16 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Location {
 
    private String shortDesc;
    private String longDesc;
-   private HashMap<String, String> directions; // HashMap<NWSE, String>, every direction points to another location by compass sign since the main HAsh map will have all location keyed by the short desc
+   private HashMap<DIRECTIONS, String> directions; // HashMap<NWSE, String>, every direction points to another location by compass sign since the main HAsh map will have all location keyed by the short desc
 
-   public Location(String shortDesc, String longDesc, HashMap<String, String> directions) {
+   public enum DIRECTIONS {
+      N, W, S, E, NW, NE, SW, SE
+   }
+
+   public Location(String shortDesc, String longDesc, HashMap<DIRECTIONS, String> directions) {
       this.shortDesc = shortDesc;
       this.longDesc = longDesc;
       this.directions = new HashMap<>();
@@ -29,7 +31,7 @@ public class Location {
       this(game.getLocation(shortDesc).getShortDesc(), game.getLocation(shortDesc).getLongDesc(), game.getLocation(shortDesc).getDirections());
    }
 
-   public HashMap<String, String> getDirections() {
+   public HashMap<DIRECTIONS, String> getDirections() {
       return directions;
    }
 
@@ -49,7 +51,7 @@ public class Location {
       this.longDesc = longDesc;
    }
 
-   public void addDirection(String direction, String location) {
+   public void addDirection(DIRECTIONS direction, String location) {
       //function in the AdventureGame class that checks if the location exists and if the direction
       //length is equal to 1, so it can be added.
       directions.put(direction, location);
